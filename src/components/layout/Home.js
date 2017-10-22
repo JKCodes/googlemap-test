@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Sidebar, Form, Feature, Footer } from '../../theme'
-
+import { Map } from '../custom'
 export default (props) => {
 
   return (
     <div>
 
       <div className="nav-container nav container--sidebar">
-        <div className="nav-sidebar-column">
-
+        <div className="nav-sidebar-column" style={{padding: 0}}>
+          <Map />
         </div>
       </div>
 
