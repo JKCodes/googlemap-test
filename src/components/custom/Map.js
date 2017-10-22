@@ -3,14 +3,41 @@ import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
 class Map extends Component {
   
+  constructor() {
+    super()
+    this.state = {
+      map: null
+    }
+  }
+
+  mapMoved() {
+    console.log("moved to" + JSON.stringify(this.state.map.getCenter()))
+  }
+
+  mapLoaded(map) {
+    if (this.state.map != null)
+      return
+
+    this.setState({
+      map: map
+    })
+  }
+
+  zoomChanged() {
+    console.log("zoom changed to " + this.state.map.getZoom())
+  }
+
   render() {
 
     const markers = this.props.markers || []
 
     return (
       <GoogleMap
-        defaultZoom={3}
-        defaultCenter={{ lat: -25.363882, lng: 131.044922 }}>
+        ref={this.mapLoaded.bind(this)}
+        onDragEnd={this.mapMoved.bind(this)}
+        onZoomChanged={this.zoomChanged.bind(this)}
+        defaultZoom={this.props.zoom}
+        defaultCenter={this.props.center}>
         {markers.map((marker, index) => (
             <Marker {...marker} />
           )
@@ -18,7 +45,6 @@ class Map extends Component {
       </GoogleMap>
     )
   }
-
 }
 
 export default withGoogleMap(Map)

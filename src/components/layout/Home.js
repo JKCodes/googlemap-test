@@ -8,7 +8,9 @@ export default (props) => {
 
       <div className="nav-container nav container--sidebar">
         <div className="nav-sidebar-column" style={{padding: 0}}>
-          <Map 
+          <Map
+            zoom={14}
+            center={{lat:40.728199, lng:-73.9894738}}
             containerElement={<div style={{height:100+'%'}} /> }
             mapElement={<div style={{height:100+'%'}} /> }
           />
